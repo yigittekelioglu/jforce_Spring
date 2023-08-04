@@ -36,7 +36,7 @@ public class UserController {
 	@PostMapping("/api/1.0/users")
 	@ResponseStatus(HttpStatus.CREATED)
 	public GenericResponse createUser(@Valid @RequestBody User user) {
-		
+		//log.info("Creating user: " + user.getUsername());
 		
 		 /* bu kısım response entity type'ı ile, manuel olarak kontrol etmeye yarıyor validationları /ResponseEntity<?>
 		  * 
@@ -69,6 +69,8 @@ public class UserController {
 		 //return response;*/
 	} 
 	
+	
+	/*
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiError handleValidationException(MethodArgumentNotValidException exception) {
@@ -79,6 +81,6 @@ public class UserController {
 		 }
 		 error.setValidationErrors(validationErrors);
 		 return error;
-	 }
+	 }*/
 
 }
