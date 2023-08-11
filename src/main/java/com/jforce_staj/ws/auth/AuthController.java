@@ -88,7 +88,7 @@ public class AuthController {
 		//responseBody.put("password", inDB.getPassword());
 		
 		//log.info(authorization);
-		System.out.println("Kimlik doğrulanan kullanıcı: " + user);
+		System.out.println("Kimlik doğrulanan kullanıcı: " + user.getUsername());
 		return ResponseEntity.ok(user);
 	}
 	

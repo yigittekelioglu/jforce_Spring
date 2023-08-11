@@ -32,6 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
+			.antMatchers("/admin/**").hasRole("ADMIN")
+	        .antMatchers("/ik/**").hasRole("IK")
+	        .antMatchers("/inventory/**").hasRole("INVENTORYMASTER")
 			.anyRequest().permitAll()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

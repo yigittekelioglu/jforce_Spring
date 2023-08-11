@@ -12,8 +12,11 @@ public class UserService {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
-	
+	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
 	
 	PasswordEncoder passwordEncoder;
 
@@ -42,6 +45,26 @@ public class UserService {
 	        log.error("Error while saving user: " + user.getUsername(), e);
 	    }
 	    //log.info("User saved successfully: " + user.getUsername());
+	}
+
+	
+	public void assignAdminRoleToAdminUser() {
+	    User adminUser = userRepository.findByUsername("admin");
+	    if (adminUser != null) {
+	        Role adminRole = roleRepository.findByName(Role.RoleType.ADMIN)
+	            .orElseThrow(() -> new RuntimeException("Admin rolü bulunamadı!"));
+	        
+	        
+	        if (!adminUser.getRoles().contains(adminRole)) {
+	            adminUser.getRoles().add(adminRole);
+	            userRepository.save(adminUser);
+	            log.info("Admin kullanıcısına ADMIN rolü başarıyla atandı.");
+	        } else {
+	            log.info("Admin kullanıcısı zaten ADMIN rolüne sahip.");
+	        }
+	    } else {
+	        log.error("Admin kullanıcısı bulunamadı!");
+	    }
 	}
 
 
