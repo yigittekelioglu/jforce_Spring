@@ -1,4 +1,4 @@
-package com.jforce_staj.ws.user;
+package com.jforce_staj.ws.role;
 
 import java.util.Optional;
 

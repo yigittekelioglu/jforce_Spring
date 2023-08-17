@@ -11,3 +11,5 @@
 -sign in yapıldı
 
 -authentication kontrolleri ve error classları yazıldı
+
+-Admin role tanımlaması yapıldı ve roller yapıldı

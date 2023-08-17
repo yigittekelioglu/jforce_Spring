@@ -1,6 +1,6 @@
 package com.jforce_staj.ws.user;
 
-import java.util.Collection;
+import java.util.Collection; 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.jforce_staj.ws.role.Role;
 import com.jforce_staj.ws.shared.Views;
 
 import lombok.Data;
@@ -65,9 +67,7 @@ public class User  implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-	    return roles.stream()
-	                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
-	                .collect(Collectors.toList());
+	    return AuthorityUtils.createAuthorityList("ROLE_" + role.getName().name());
 	}
 
 
@@ -96,14 +96,10 @@ public class User  implements UserDetails{
 		return true;
 	}
 	
-	
-	@ManyToMany(fetch = FetchType.EAGER)//performans düşürüyor fakat çalışıyor
-    @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
-	
+	@JsonView(Views.Base.class)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "role_id")
+	private Role role;
+
 	
 }

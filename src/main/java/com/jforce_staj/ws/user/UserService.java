@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.jforce_staj.ws.role.Role;
+import com.jforce_staj.ws.role.RoleRepository;
+
 @Service
 public class UserService {
 	
@@ -15,8 +18,7 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Autowired
-	RoleRepository roleRepository;
+	
 	
 	PasswordEncoder passwordEncoder;
 
@@ -48,24 +50,6 @@ public class UserService {
 	}
 
 	
-	public void assignAdminRoleToAdminUser() {
-	    User adminUser = userRepository.findByUsername("admin");
-	    if (adminUser != null) {
-	        Role adminRole = roleRepository.findByName(Role.RoleType.ADMIN)
-	            .orElseThrow(() -> new RuntimeException("Admin rolü bulunamadı!"));
-	        
-	        
-	        if (!adminUser.getRoles().contains(adminRole)) {
-	            adminUser.getRoles().add(adminRole);
-	            userRepository.save(adminUser);
-	            log.info("Admin kullanıcısına ADMIN rolü başarıyla atandı.");
-	        } else {
-	            log.info("Admin kullanıcısı zaten ADMIN rolüne sahip.");
-	        }
-	    } else {
-	        log.error("Admin kullanıcısı bulunamadı!");
-	    }
-	}
-
+	
 
 }

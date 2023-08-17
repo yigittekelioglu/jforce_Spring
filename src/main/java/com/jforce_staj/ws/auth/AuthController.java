@@ -57,6 +57,7 @@ public class AuthController {
 		
 		
 		User user = (User) authentication.getPrincipal();
+		
 		//String username = user.getUsername();
 		
 		//databseden user getiriyor
@@ -88,6 +89,7 @@ public class AuthController {
 		//responseBody.put("password", inDB.getPassword());
 		
 		//log.info(authorization);
+		System.out.println("Kullanıcının Roller: " + user.getRole());
 		System.out.println("Kimlik doğrulanan kullanıcı: " + user.getUsername());
 		return ResponseEntity.ok(user);
 	}

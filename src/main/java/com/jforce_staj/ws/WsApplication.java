@@ -7,9 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-import com.jforce_staj.ws.user.Role;
-import com.jforce_staj.ws.user.Role.RoleType;
-import com.jforce_staj.ws.user.RoleRepository;
+import com.jforce_staj.ws.role.Role;
+import com.jforce_staj.ws.role.RoleRepository;
+import com.jforce_staj.ws.role.RoleService;
+import com.jforce_staj.ws.role.Role.RoleType;
 import com.jforce_staj.ws.user.UserService;
 
 
@@ -22,7 +23,7 @@ public class WsApplication {
     RoleRepository roleRepository;
 	
 	@Autowired
-    UserService userService;
+    RoleService roleService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WsApplication.class, args);
@@ -38,7 +39,9 @@ public class WsApplication {
 				//roleRepository.save(new Role(RoleType.ADMIN));
 	            //roleRepository.save(new Role(RoleType.IK));
 	            //roleRepository.save(new Role(RoleType.INVENTORYMASTER));
-				userService.assignAdminRoleToAdminUser();
+				roleService.assignAdminRoleToAdminUser();
+				roleService.assignIkRoleToIkUser();
+				roleService.assignInventorymasterRoleToInventorymasterUser();
 			}
 			
 		};
