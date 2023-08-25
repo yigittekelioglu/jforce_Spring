@@ -10,7 +10,4 @@ public interface InventoryAssignmentRepository extends JpaRepository<InventoryAs
 
     List<InventoryAssignment> findByStaff(Staff staff);
    
-
-    
-
 }

@@ -13,3 +13,11 @@
 -authentication kontrolleri ve error classları yazıldı
 
 -Admin role tanımlaması yapıldı ve roller yapıldı
+
+-staff, ınventory ve ınventory assignment classları tanımlandı
+
+-staff, ınventory ve ınventory assignment repoları tanımlandı
+
+-staff, ınventory ve ınventory assignment controllerları tanımlandı
+
+-staff, ınventory ve ınventory assignment service'leri tanımlandı

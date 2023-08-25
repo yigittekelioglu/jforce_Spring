@@ -29,7 +29,7 @@ public class Staff {
     }
 
     public enum Gorev {
-        YAZILIM_GELİŞTIRME_UZMANI,
+        YAZILIM_GELISTIRME_UZMANI,
         YONETMEN_YARDIMCISI,
         YONETMEN
     }
