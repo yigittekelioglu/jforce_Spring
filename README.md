@@ -21,3 +21,5 @@
 -staff, ınventory ve ınventory assignment controllerları tanımlandı
 
 -staff, ınventory ve ınventory assignment service'leri tanımlandı
+
+-admin kullanıcısının başka userlara rol verme özelliği atandı

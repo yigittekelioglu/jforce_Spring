@@ -67,6 +67,10 @@ public class User  implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if(role == null) {
+	        
+	        return AuthorityUtils.createAuthorityList();
+	    }
 	    return AuthorityUtils.createAuthorityList("ROLE_" + role.getName().name());
 	}
 

@@ -13,14 +13,23 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+ 
+    
+    @GetMapping("/types")
+    public ResponseEntity<List<InventoryType>> getAllInventoryTypes() {
+        List<InventoryType> types = inventoryService.getAllInventoryTypes();
+        return ResponseEntity.ok(types);
+    }
+
     
     @GetMapping("/filter")
     public ResponseEntity<List<Inventory>> getInventoriesByType(
-            @RequestParam(required = false) InventoryType type) {
-        
-        List<Inventory> inventories = inventoryService.getInventoryByType(type);
+            @RequestParam(required = false) String typeName) {
+
+        List<Inventory> inventories = inventoryService.getInventoryByTypeName(typeName);
         return ResponseEntity.ok(inventories);
     }
+
 
     
     @GetMapping("/{id}")

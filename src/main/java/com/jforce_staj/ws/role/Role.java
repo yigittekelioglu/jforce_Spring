@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.jforce_staj.ws.shared.Views;
 import com.jforce_staj.ws.user.User;
@@ -37,6 +38,7 @@ public class Role {
     
     
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<User> users = new ArrayList<>();
     
     public Role() {

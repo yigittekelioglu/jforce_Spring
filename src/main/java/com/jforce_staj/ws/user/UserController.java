@@ -1,12 +1,13 @@
 package com.jforce_staj.ws.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger; 
-
+import java.util.Optional;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,18 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jforce_staj.ws.error.ApiError;
+import com.jforce_staj.ws.role.Role;
+import com.jforce_staj.ws.role.Role.RoleType;
+import com.jforce_staj.ws.role.RoleRepository;
 import com.jforce_staj.ws.shared.GenericResponse;
 
 @RestController
@@ -31,6 +38,12 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
 	
 	//@CrossOrigin //cross yapıyor cıfte lınk
 	@PostMapping("/api/1.0/users")
@@ -68,6 +81,28 @@ public class UserController {
 		 //response.setMessage("User created.");
 		 //return response;*/
 	} 
+	
+	
+	@GetMapping("/api/1.0/users")
+	public List<User> getUsers() {
+	    return userRepository.findAll();
+	}
+
+	
+	@PutMapping("/api/1.0/users/{userId}/role")
+	public ResponseEntity<?> setUserRole(@PathVariable Long userId, @RequestBody RoleType roleType) {
+	    Optional<User> userOptional = userRepository.findById(userId);    
+	    Optional<Role> roleOptional = roleRepository.findByName(roleType);
+	    
+	    User user = userOptional.get();
+	    Role role = roleOptional.get();
+	    user.setRole(role);
+	    userRepository.save(user);
+	    
+	    return ResponseEntity.ok(user);
+	}
+
+
 	
 	
 	/*

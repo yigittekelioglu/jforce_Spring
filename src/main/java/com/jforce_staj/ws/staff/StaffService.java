@@ -17,9 +17,15 @@ public class StaffService {
         return staffRepository.findById(id);
     }
 
+    /*
     public List<Staff> filterStaff(String adi, String soyadi, String tckn, Staff.Birim birim) {
         return staffRepository.findByAdiContainingAndSoyadiContainingAndTcknAndBirim(adi, soyadi, tckn, birim);
+    }*/
+    
+    public List<Staff> filterStaff(String adi, String soyadi, String tckn, Staff.Birim birim) {
+        return staffRepository.findByFilters(adi, soyadi, tckn, birim);
     }
+
 
     public Staff addStaff(Staff staff) {
         return staffRepository.save(staff);

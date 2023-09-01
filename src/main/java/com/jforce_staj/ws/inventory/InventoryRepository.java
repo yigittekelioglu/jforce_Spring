@@ -9,4 +9,6 @@ import java.util.List;
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> findByType(InventoryType type);
     List<Inventory> findByStatus(Inventory.InventoryStatus status);
+    
+
 }
