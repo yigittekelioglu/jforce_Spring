@@ -21,19 +21,19 @@ public class InventoryControllerAdvice {
     public class InventoryTypeEditor extends PropertyEditorSupport {
 
         @Autowired
-        private InventoryTypeRepository inventoryTypeRepository;
+        InventoryTypeRepository inventoryTypeRepository;
 
         @Override
         public void setAsText(String typeName) {
-            Optional<InventoryType> optionalType = inventoryTypeRepository.findByType(typeName);
+            Optional<InventoryType> filterType = inventoryTypeRepository.findByType(typeName);
             
             InventoryType type;
             
-            if (!optionalType.isPresent()) {
+            if (!filterType.isPresent()) {
                 type = new InventoryType(typeName);
                 inventoryTypeRepository.save(type);
             } else {
-                type = optionalType.get();
+                type = filterType.get();
             }
             
             setValue(type);

@@ -91,15 +91,15 @@ public class UserController {
 	
 	@PutMapping("/api/1.0/users/{userId}/role")
 	public ResponseEntity<?> setUserRole(@PathVariable Long userId, @RequestBody RoleType roleType) {
-	    Optional<User> userOptional = userRepository.findById(userId);    
-	    Optional<Role> roleOptional = roleRepository.findByName(roleType);
+	    Optional<User> selectedUser = userRepository.findById(userId);    
+	    Optional<Role> selectedRole = roleRepository.findByName(roleType);
 	    
-	    User user = userOptional.get();
-	    Role role = roleOptional.get();
+	    User user = selectedUser.get();
+	    Role role = selectedRole.get();
 	    user.setRole(role);
 	    userRepository.save(user);
 	    
-	    return ResponseEntity.ok(user);
+	    return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 

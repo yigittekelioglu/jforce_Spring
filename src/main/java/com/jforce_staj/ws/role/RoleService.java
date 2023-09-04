@@ -27,7 +27,7 @@ public class RoleService {
         Role adminRole = roleRepository.findByName(Role.RoleType.ADMIN).orElse(null);  
         adminUser.setRole(adminRole);
         userRepository.save(adminUser);
-        log.info("Admin kullanıcısına ADMIN rolü başarıyla atandı.");
+        log.info("Admin kullanıcısına rolü atandı.");
     }
 
     
@@ -37,7 +37,7 @@ public class RoleService {
         
         ikUser.setRole(ikRole);
         userRepository.save(ikUser);
-        log.info("Ik kullanıcısına IK rolü atandı.");
+        log.info("Ik kullanıcısına rolü atandı.");
     }
 
     public void assignInventorymasterRoleToInventorymasterUser() {
@@ -46,7 +46,7 @@ public class RoleService {
 
         inventorymasterUser.setRole(inventorymasterRole);
         userRepository.save(inventorymasterUser);
-        log.info("inventorymaster kullanıcısına INVENTORYMASTER rolü atandı.");
+        log.info("Inventorymaster kullanıcısına rolü atandı.");
     }
 
 }

@@ -1,7 +1,7 @@
 package com.jforce_staj.ws.inventoryassignment;
 
 
-import com.jforce_staj.ws.inventory.Inventory;
+import com.jforce_staj.ws.inventory.Inventory; 
 import com.jforce_staj.ws.staff.Staff;
 import lombok.Getter;
 import lombok.Setter;

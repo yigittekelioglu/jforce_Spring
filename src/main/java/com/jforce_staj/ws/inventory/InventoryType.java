@@ -21,6 +21,7 @@ public class InventoryType {
 
     @Column(nullable = false, length = 50)
     private String type;
+    //enum tanımla
     
     public InventoryType(String type) {
         this.type = type;

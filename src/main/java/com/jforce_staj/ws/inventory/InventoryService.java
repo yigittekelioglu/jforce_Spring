@@ -21,17 +21,15 @@ public class InventoryService {
     }
 
     public List<Inventory> getInventoryByTypeName(String typeName) {
-        if (typeName == null || typeName.trim().isEmpty()) {
-            return getAllInventory();
+    	
+    	Optional<InventoryType> filteredType = inventoryTypeRepository.findByType(typeName);
+    	if (filteredType.isPresent()) {
+            return inventoryRepository.findByType(filteredType.get());
         }
-
-        Optional<InventoryType> optionalType = inventoryTypeRepository.findByType(typeName);
-        
-        if (!optionalType.isPresent()) {
-            return Collections.emptyList();
-        }
-
-        return inventoryRepository.findByType(optionalType.get());
+    	else {
+    		return getAllInventory();
+    	}
+    	
     }
 
     public List<Inventory> getAllInventory() {
@@ -44,14 +42,13 @@ public class InventoryService {
 
         if (existingType.isPresent()) {
             inventory.setType(existingType.get());
-        } else {
+        } 
+        else {
             InventoryType newType = new InventoryType(type.getType());
             inventory.setType(inventoryTypeRepository.save(newType));
         }
-        
         return inventoryRepository.save(inventory);
     }
-
 
     public Inventory updateInventory(Inventory inventory) {
         return inventoryRepository.save(inventory);

@@ -11,6 +11,10 @@ import java.util.Date;
 @Setter
 @Table(name = "inventory")
 public class Inventory {
+	
+	public enum InventoryStatus {
+		IN_PERSON, IN_OFFICE, IN_STORAGE
+	}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +42,5 @@ public class Inventory {
     private InventoryStatus status;  
 
     
-    public enum InventoryStatus {
-        IN_PERSON, IN_OFFICE, IN_STORAGE
-    }
+   
 }
