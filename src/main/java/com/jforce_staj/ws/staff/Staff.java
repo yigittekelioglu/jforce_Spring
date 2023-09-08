@@ -1,6 +1,10 @@
 package com.jforce_staj.ws.staff;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
@@ -55,10 +59,13 @@ public class Staff {
     @Column(nullable = false)
     private String medeniDurumu;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 11)//yanlıslıkla string yapmısım bunu nasıl longa ceviricem
+    @Size(min=11, max=11, message="TCKN 11 karakter olmalıdır!")
+    @Pattern(regexp = "[0-9]+", message="TCKN sadece rakam içermelidir!")
     private String tckn;
 
     @Column(nullable = false)
+    @Min(0)
     private Long sicilNumarasi;
 
     @Column
